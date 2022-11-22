@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -75,6 +76,13 @@ public final class MaterialGenerator extends DataGenerator {
                     }
                     itemJson.add("foodProperties", foodPropertiesJson);
                 }
+            }
+            // Tool properties
+            if (item instanceof DiggerItem tool) {
+                JsonObject toolProperties = new JsonObject();
+                final int digLevel = tool.getTier().getLevel();
+                toolProperties.addProperty("digLevel", digLevel);
+                itemJson.add("toolProperties", toolProperties);
             }
             // Armor properties
             if (item instanceof ArmorItem armorItem) {
